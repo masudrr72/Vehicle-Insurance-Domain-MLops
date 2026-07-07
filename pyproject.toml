@@ -1,16 +1,11 @@
 [project]
-name = "src"
+name = "vehicle_insurance_mlops"
 version = "0.0.1"
 description = "End-to-end MLops project with CI/CD and Docker"
-authors = [
-    {name:"Masudur Rahman", email = "masudaub1303@gmail.com"}
-]
-
+authors = [{name = "Masudur Rahman", email = "masudaucb1303@gmail.com"}]
 
 [tool.setuptools]
-packages = (find = {})
-
-
+packages = {find = {}}
 
 [tool.setuptools.dynamic]
 dependencies = {file = "requirements.txt"}
