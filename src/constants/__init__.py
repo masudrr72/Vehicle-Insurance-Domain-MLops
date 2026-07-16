@@ -34,6 +34,10 @@ DATA_INGESTION_INGESTED_DIR: str = "ingested"
 DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.20
 RANDOM_STATE: int = 42
 
+# Data validation
+
+DATA_VALIDATION_DIR_NAME: str = "data_validation"
+DATA_VALIDATION_REPORT_FILE_NAME: str = "report.yaml"
 
 
 

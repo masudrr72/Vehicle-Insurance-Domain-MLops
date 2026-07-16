@@ -45,16 +45,23 @@
 
 # ------------------------------------------------------------------
 
-from src.components.data_ingestion import DataIngestion
-from src.exception import MyException
+# from src.components.data_ingestion import DataIngestion
+# from src.exception import MyException
 
-if __name__ == "__main__":
-    try:
-        data_ingestion = DataIngestion()
-        artifact = data_ingestion.initiate_data_ingestion()
+# if __name__ == "__main__":
+#     try:
+#         data_ingestion = DataIngestion()
+#         artifact = data_ingestion.initiate_data_ingestion()
 
-        print("\nData Ingestion completed successfully!")
-        print(artifact)
+#         print("\nData Ingestion completed successfully!")
+#         print(artifact)
 
-    except Exception as e:
-        raise MyException(e)
+#     except Exception as e:
+#         raise MyException(e)
+
+# -------------------------------------------------
+from src.pipeline.training_pipeline import TrainPipeline
+
+pipeline = TrainPipeline()
+pipeline.run_pipeline()
+print("Completed")
