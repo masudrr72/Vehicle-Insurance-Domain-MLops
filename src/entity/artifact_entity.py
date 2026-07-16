@@ -12,3 +12,12 @@ class DataValidationArtifact:
     validation_status:bool
     message:str
     val_report_file_path:str
+
+
+@dataclass
+class DataTransformationArtifact:
+    transformed_train_feature_file_path: str
+    transformed_test_feature_file_path: str
+    transformed_train_target_file_path: str
+    transformed_test_target_file_path: str
+    transformed_object_file_path: str

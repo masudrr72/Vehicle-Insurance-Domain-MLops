@@ -39,6 +39,19 @@ RANDOM_STATE: int = 42
 DATA_VALIDATION_DIR_NAME: str = "data_validation"
 DATA_VALIDATION_REPORT_FILE_NAME: str = "report.yaml"
 
+# Data transformation
+
+DATA_TRANSFORMATION_DIR_NAME: str = "data_transformation"
+DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR: str = "transformed"
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR: str = "transformed_object"
+PREPROCESSING_OBJECT_FILE_NAME = "preprocessor.pkl"
+
+TRAIN_FEATURE_FILE_NAME: str = "X_train.npy"
+TEST_FEATURE_FILE_NAME: str = "X_test.npy"
+
+TRAIN_TARGET_FILE_NAME: str = "y_train.npy"
+TEST_TARGET_FILE_NAME: str = "y_test.npy"
+
 
 
 

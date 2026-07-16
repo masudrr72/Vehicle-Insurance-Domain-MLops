@@ -4,13 +4,16 @@ from src.exception import MyException
 
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
+from src.components.data_transformation import DataTransformation
 
 from src.entity.config_entity import DataIngestionConfig
 from src.entity.config_entity import DataValidationConfig
+from src.entity.config_entity import DataTransformationConfig
 
 
 from src.entity.artifact_entity import DataIngestionArtifact
 from src.entity.artifact_entity import DataValidationArtifact
+from src.entity.artifact_entity import DataTransformationArtifact
 
 
 
@@ -19,6 +22,7 @@ class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
         self.data_validation_config = DataValidationConfig()
+        self.data_transformation_config = DataTransformationConfig()
 
 
     def start_data_ingestion(self) -> DataIngestionArtifact:
@@ -40,10 +44,10 @@ class TrainPipeline:
 
     def start_data_validation(self, data_ingestin_artifact: DataIngestionArtifact)-> DataValidationArtifact:
         """
-        This method of TrainPipeline class is responsible for starting data ingestion component
+        This method of TrainPipeline class is responsible for starting data validation component.
         """
-        logging.info("Entered the start_data_validation method of TrainPipeline class")
         try:
+            logging.info("Entered the start_data_validation method of TrainPipeline class")
             data_validation = DataValidation(data_ingesetion_artifact=data_ingestin_artifact,
                                              data_validation_config= self.data_validation_config
                                              )
@@ -57,6 +61,24 @@ class TrainPipeline:
             raise MyException(e, sys) from e
         
 
+    def start_data_transformation(self, data_ingestion_artifact: DataIngestionArtifact, data_validation_artifact: DataTransformationArtifact)-> DataTransformationArtifact:
+        """
+        This method of TrainPipeline class is responsible for starting data transformation component.
+        """
+        try:
+            logging.info("Entered the start_data_transformation method of TrainPipeline class")
+            data_transformation = DataTransformation(data_ingestion_artifact= data_ingestion_artifact,
+                                                    data_validation_artifact=data_validation_artifact,
+                                                    data_transformation_config= DataTransformationConfig)
+            data_transformation_artifact = data_transformation.initiate_data_transformation()
+            logging.info("Performed the data transformation operation")
+            logging.info("Exited the start_data_transformation method of TrainPipeline class")
+            return data_transformation_artifact
+        
+        except Exception as e:
+            raise MyException(e,sys)
+        
+
 
 
 
@@ -67,6 +89,8 @@ class TrainPipeline:
         try:
             data_ingestion_artifact = self.start_data_ingestion()
             data_validation_artifact = self.start_data_validation(data_ingestin_artifact=data_ingestion_artifact)
+            data_transformation_artifact = self.start_data_transformation(data_ingestion_artifact=data_ingestion_artifact,
+                                                                          data_validation_artifact= data_validation_artifact)
         
         except Exception as e:
             raise MyException(e, sys)
