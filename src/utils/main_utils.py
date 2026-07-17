@@ -48,6 +48,21 @@ def load_numpy_array_data(file_path: str) -> np.array:
             return np.load(file_obj)
     except Exception as e:
         raise MyException(e, sys) from e
+    
+
+def load_object(file_path: str):
+    """
+    Load a serialized object from the specified file path.
+    """
+    try:
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Object file not found: {file_path}")
+
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
+
+    except Exception as e:
+        raise MyException(e, sys) from e
 
 
 def save_object(file_path: str, obj: object) -> None:

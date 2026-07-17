@@ -53,6 +53,26 @@ TRAIN_TARGET_FILE_NAME: str = "y_train.npy"
 TEST_TARGET_FILE_NAME: str = "y_test.npy"
 
 
+# Model training
+
+MODEL_TRAINER_DIR_NAME: str = "model_trainer"
+MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
+MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
+MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("config", "model.yaml")
+
+SCALE_POS_WEIGHT: float = 7.16
+N_ESTIMATORS: int= 300
+LEARNING_RATE: float = 0.05
+MAX_DEPTH: int = 7
+MIN_CHILD_WEIGHT: int = 5
+RANDOM_STATE: int = 42
+SUBSAMPLE: float = 0.8
+REG_LAMBDA: int = 3
+REG_ALPHA: float= 0.1
+GAMMA: float = 0.1
+COLSAMPLE_BYTREE: float = 0.8
+
+
 
 
 

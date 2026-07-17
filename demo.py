@@ -59,9 +59,15 @@
 #     except Exception as e:
 #         raise MyException(e)
 
+# ------------------------------------------------
+# model_trainer test
+
+
+
 # -------------------------------------------------
 from src.pipeline.training_pipeline import TrainPipeline
 
 pipeline = TrainPipeline()
 pipeline.run_pipeline()
 print("Completed")
+

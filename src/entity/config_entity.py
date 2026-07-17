@@ -42,3 +42,20 @@ class DataTransformationConfig:
     transformed_train_target_file_path: str = os.path.join(data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR, TRAIN_TARGET_FILE_NAME)
     transformed_test_target_file_path: str = os.path.join(data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR, TEST_TARGET_FILE_NAME)
     transformed_object_file_path: str = os.path.join(data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR, PREPROCESSING_OBJECT_FILE_NAME)
+
+@dataclass
+class ModelTrainerConfig:
+    model_trainer_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_TRAINER_DIR_NAME)
+    trained_model_file_path: str= os.path.join(model_trainer_dir, MODEL_TRAINER_TRAINED_MODEL_DIR, MODEL_FILE_NAME)
+    model_config_file_path: str = MODEL_TRAINER_MODEL_CONFIG_FILE_PATH
+    _scale_pos_weight = SCALE_POS_WEIGHT
+    _n_estimators = N_ESTIMATORS
+    _learning_rate = LEARNING_RATE
+    _max_depth = MAX_DEPTH
+    _min_child_weight = MIN_CHILD_WEIGHT
+    _random_state = RANDOM_STATE
+    _subsample = SUBSAMPLE
+    _reg_lambda = REG_LAMBDA
+    _reg_alpha = REG_ALPHA
+    _gamma = GAMMA
+    _colsample_bytree = COLSAMPLE_BYTREE
