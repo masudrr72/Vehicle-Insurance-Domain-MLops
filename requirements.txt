@@ -21,4 +21,8 @@ uvicorn
 jinja2
 imblearn
 
+dotenv 
+azure-storage-blob
+
+
 -e .

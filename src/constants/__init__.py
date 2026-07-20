@@ -21,10 +21,6 @@ TEST_FILE_NAME: str = "test.csv"
 SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")
 
 
-AWS_ACCESS_KEY_ID_ENV_KEY = "AWS_ACCESS_KEY_ID"
-AWS_SECRET_ACCESS_KEY_ENV_KEY = "AWS_SECRET_ACCESS_KEY"
-REGION_NAME = "us-east-1"
-
 # Data ingestion
 
 DATA_INGESTION_COLLECTION_NAME: str = "vehicle_project_data"
@@ -72,6 +68,16 @@ REG_ALPHA: float= 0.1
 GAMMA: float = 0.1
 COLSAMPLE_BYTREE: float = 0.8
 
+
+# Model Evaluation
+
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
+
+# Azure Blob storage
+
+AZURE_STORAGE_CONTAINER_NAME: str = "model-registry"
+
+MODEL_PUSHER_BLOB_PREFIX: str = "vehicle-insurance"
 
 
 

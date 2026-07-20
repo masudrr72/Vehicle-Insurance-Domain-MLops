@@ -15,9 +15,9 @@ from src.utils.main_utils import read_yaml_file
 
 class DataValidation:
 
-    def __init__(self, data_ingesetion_artifact: DataIngestionArtifact, data_validation_config: DataValidationConfig ):
+    def __init__(self, data_ingestion_artifact: DataIngestionArtifact, data_validation_config: DataValidationConfig ):
         try:
-            self.data_ingestion_artifact = data_ingesetion_artifact
+            self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_config = data_validation_config
             self._schema_config = read_yaml_file(file_path = SCHEMA_FILE_PATH)
 

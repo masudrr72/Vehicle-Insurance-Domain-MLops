@@ -59,3 +59,16 @@ class ModelTrainerConfig:
     _reg_alpha = REG_ALPHA
     _gamma = GAMMA
     _colsample_bytree = COLSAMPLE_BYTREE
+
+
+@dataclass
+class ModelEvaluationConfig:
+    changed_threshold_score: float = MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+    container_name: str = AZURE_STORAGE_CONTAINER_NAME
+    blob_name: str = f"{MODEL_PUSHER_BLOB_PREFIX}/{MODEL_FILE_NAME}"
+
+@dataclass
+class ModelPusherConfig:
+    container_name: str = AZURE_STORAGE_CONTAINER_NAME
+    blob_name: str = f"{MODEL_PUSHER_BLOB_PREFIX}/v/{MODEL_FILE_NAME}"
+

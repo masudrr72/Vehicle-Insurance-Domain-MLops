@@ -65,6 +65,17 @@
 
 
 # -------------------------------------------------
+
+# from src.configuration.azure_connection import AzureBlobStorageCient
+
+# client = AzureBlobStorageCient()
+
+# blob_client = client.get_blob_service_client()
+
+# print(type(blob_client))
+
+# -------------------------
+
 from src.pipeline.training_pipeline import TrainPipeline
 
 pipeline = TrainPipeline()
