@@ -72,3 +72,7 @@ class ModelPusherConfig:
     container_name: str = AZURE_STORAGE_CONTAINER_NAME
     blob_name: str = f"{MODEL_PUSHER_BLOB_PREFIX}/{MODEL_FILE_NAME}"
 
+@dataclass
+class VehiclePredictorConfig:
+    container_name: str = AZURE_STORAGE_CONTAINER_NAME
+    blob_name: str = f"{MODEL_PUSHER_BLOB_PREFIX}/{MODEL_FILE_NAME}"
