@@ -134,8 +134,6 @@ class TrainPipeline:
             raise MyException(e, sys)
 
 
-
-
     def run_pipeline(self, ) -> None:
         """
         This method of TrainPipeline class is responsible for running complete pipeline
