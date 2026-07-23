@@ -10,7 +10,7 @@ from src.pipeline.prediction_pipeline import (
 
 app = FastAPI(
     title="Vehicle Insurance Prediction",
-    description="End-to-End MLOps Project",
+    description="End-to-End MLOps Project by MASUDUR RAHMAN",
     version="1.0"
 )
 
@@ -67,9 +67,9 @@ async def predict(
     probability = prediction_pipeline.predict_proba(dataframe)
 
     prediction_label = (
-        "Interested in Vehicle Insurance"
+        "❇️Interested in Vehicle Insurance"
         if prediction == 1
-        else "Not Interested in Vehicle Insurance"
+        else "⛔️Not Interested in Vehicle Insurance"
     )
 
     probability = round(probability * 100, 2)
