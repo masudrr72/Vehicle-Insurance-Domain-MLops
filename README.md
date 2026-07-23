@@ -271,17 +271,6 @@ Every push to the **main** branch automatically:
 
 ---
 
-# 📸 Project Screenshots
-
-> Add screenshots here
-
-- Home Page
-- Prediction Result
-- Swagger Documentation
-- GitHub Actions Workflow
-- Azure Web App
-
----
 
 # 🚀 Future Improvements
 
