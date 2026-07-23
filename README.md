@@ -8,6 +8,8 @@
 ![XGBoost](https://img.shields.io/badge/XGBoost-ML-orange)
 ![License](https://img.shields.io/badge/License-MIT-success)
 
+![image alt](https://github.com/masudrr72/Vehicle-Insurance-Domain-MLops/blob/main/vehicle_insurance_mlops_banner.png)
+
 An industry-standard **End-to-End Machine Learning MLOps Project** that predicts whether a customer is interested in purchasing vehicle insurance. This project demonstrates a complete production ML workflow from data ingestion to cloud deployment using **FastAPI, Docker, Azure, and GitHub Actions**.
 
 ---
