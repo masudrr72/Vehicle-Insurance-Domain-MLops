@@ -2,224 +2,421 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Vehicle Insurance Prediction</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="/static/css/style.css">
 
-    <style>
-        body{
-            background:#f4f6f9;
-        }
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-        .main-card{
-            margin-top:40px;
-            margin-bottom:40px;
-            border:none;
-            border-radius:15px;
-            box-shadow:0px 5px 20px rgba(0,0,0,.1);
-        }
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-        .card-header{
-            background:#0d6efd;
-            color:white;
-            text-align:center;
-            font-size:30px;
-            font-weight:bold;
-            padding:20px;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-        .result-card{
-            margin-top:30px;
-            border-radius:10px;
-        }
-
-        .btn-primary{
-            width:100%;
-            padding:12px;
-            font-size:18px;
-        }
-
-        footer{
-            margin-top:40px;
-            text-align:center;
-            color:gray;
-        }
-    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
 <body>
 
+<div class="background-blur blur1"></div>
+<div class="background-blur blur2"></div>
+
 <div class="container">
 
-    <div class="card main-card">
+    <div class="hero">
 
-        <div class="card-header">
-            Vehicle Insurance Prediction
-        </div>
+        <span class="badge">
+            🚘 End-to-End Machine Learning MLOps Project 🚘
+        </span>
 
-        <div class="card-body">
+        <h1>
 
-            <form action="/predict" method="post">
+            Vehicle Insurance
 
-                <div class="row">
+            <span>Prediction</span>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Gender</label>
+        </h1>
 
-                        <select class="form-select" name="Gender" required>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
+        <p>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Age</label>
-                        <input type="number" class="form-control" name="Age" required>
-                    </div>
+            Predict whether a customer is interested in purchasing vehicle
+            insurance using a production-ready XGBoost model deployed on Azure.
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Driving License</label>
-
-                        <select class="form-select" name="Driving_License">
-
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Region Code</label>
-                        <input type="number" step="0.1" class="form-control" name="Region_Code" required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Previously Insured</label>
-
-                        <select class="form-select" name="Previously_Insured">
-
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">Vehicle Age</label>
-
-                        <select class="form-select" name="Vehicle_Age">
-
-                            <option value="< 1 Year">&lt; 1 Year</option>
-                            <option value="1-2 Year">1-2 Year</option>
-                            <option value="> 2 Years">&gt; 2 Years</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">Vehicle Damage</label>
-
-                        <select class="form-select" name="Vehicle_Damage">
-
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Annual Premium</label>
-
-                        <input
-                                type="number"
-                                class="form-control"
-                                step="0.01"
-                                name="Annual_Premium"
-                                required>
-
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">
-                            Policy Sales Channel
-                        </label>
-
-                        <input
-                                type="number"
-                                class="form-control"
-                                step="0.1"
-                                name="Policy_Sales_Channel"
-                                required>
-
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">
-                            Vintage
-                        </label>
-
-                        <input
-                                type="number"
-                                class="form-control"
-                                name="Vintage"
-                                required>
-
-                    </div>
-
-                </div>
-
-                <button class="btn btn-primary mt-3">
-                    Predict
-                </button>
-
-            </form>
-
-
-            {% if prediction %}
-
-            <div class="alert alert-success result-card">
-
-                <h3 class="text-center">
-                    Prediction Result
-                </h3>
-
-                <hr>
-
-                <h4>
-                    {{ prediction }}
-                </h4>
-
-                <h5>
-                    Probability :
-                    <strong>{{ probability }}%</strong>
-                </h5>
-
-            </div>
-
-            {% endif %}
-
-        </div>
+        </p>
 
     </div>
 
-    <footer>
+    <div class="card">
 
-        <p>
-            End-to-End Vehicle Insurance Prediction MLOps Project
-        </p>
+        <form
+                id="predictionForm"
+                action="/predict"
+                method="POST">
 
-    </footer>
+            <div class="form-grid">
 
-</div>
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Gender
+
+                    </label>
+
+                    <select name="Gender">
+
+                        <option>Male</option>
+                        <option>Female</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-cake-candles"></i>
+
+                        Age
+
+                    </label>
+
+                    <input
+                            type="number"
+                            name="Age"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        Driving License
+
+                    </label>
+
+                    <select name="Driving_License">
+
+                        <option value="1">Yes</option>
+
+                        <option value="0">No</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Region Code
+
+                    </label>
+
+                    <input
+                            type="number"
+                            step="0.1"
+                            name="Region_Code"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Previously Insured
+
+                    </label>
+
+                    <select name="Previously_Insured">
+
+                        <option value="1">Yes</option>
+
+                        <option value="0">No</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-car"></i>
+
+                        Vehicle Age
+
+                    </label>
+
+                    <select name="Vehicle_Age">
+
+                        <option>&lt; 1 Year</option>
+
+                        <option>1-2 Year</option>
+
+                        <option>&gt; 2 Years</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-car-burst"></i>
+
+                        Vehicle Damage
+
+                    </label>
+
+                    <select name="Vehicle_Damage">
+
+                        <option>Yes</option>
+
+                        <option>No</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                        Annual Premium
+
+                    </label>
+
+                    <input
+                            type="number"
+                            step="0.01"
+                            name="Annual_Premium"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        Sales Channel
+
+                    </label>
+
+                    <input
+                            type="number"
+                            step="0.1"
+                            name="Policy_Sales_Channel"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        Vintage
+
+                    </label>
+
+                    <input
+                            type="number"
+                            name="Vintage"
+                            required>
+
+                </div>
+
+            </div>
+
+            <button
+                    class="predict-btn"
+                    type="submit">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                Predict Customer Response
+
+            </button>
+
+        </form>
+
+
+        {% if prediction %}
+
+        <div class="result-card" id="prediction-result">
+
+            <div class="result-header">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Prediction Completed
+
+            </div>
+
+            <div class="prediction-status
+                {% if prediction_value == 1 %}
+                    success
+                {% else %}
+                    danger
+                {% endif %}
+            ">
+
+                {{ prediction }}
+
+            </div>
+
+            <div
+                class="circle
+                {% if prediction_value == 1 %}
+                    circle-success
+                {% else %}
+                    circle-danger
+                {% endif %}
+                "
+                style="--progress: {{ progress_degree }}deg;"
+            >
+
+                <div class="circle-inner">
+
+                    <span>{{ probability }}%</span>
+
+                    <small>Confidence</small>
+
+                </div>
+
+            </div>
+
+            <div class="progress">
+
+            <div
+                class="progress-fill
+                {% if prediction_value == 1 %}
+                    progress-success
+                {% else %}
+                    progress-danger
+                {% endif %}
+                "
+                style="width: {{ probability }}%;">
+            </div>
+
+            </div>
+
+            </div>
+
+            <div class="model-info">
+
+                <div>
+
+                    <h4>Model</h4>
+
+                    <p>XGBoost</p>
+
+                </div>
+
+                <div>
+
+                    <h4>Deployment</h4>
+
+                    <p>Azure</p>
+
+                </div>
+
+                <div>
+
+                    <h4>API</h4>
+
+                    <p>FastAPI</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="disclaimer">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            This prediction is generated by an XGBoost machine learning model and should be used as decision support rather than a final business decision.
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+<footer>
+
+    <div>
+
+        Built by
+
+        <strong>MASUDUR RAHMAN</strong>
+
+    </div>
+
+    <div class="footer-links">
+
+        <a href="https://github.com/masudrr72"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <i class="fab fa-github"></i>
+
+        </a>
+
+        <a href="https://www.linkedin.com/in/masudur-rahman-4b91a3327"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <i class="fab fa-linkedin"></i>
+
+        </a>
+
+    </div>
+
+    <small>
+
+        FastAPI • XGBoost • Azure • Docker • GitHub Actions
+
+    </small>
+
+</footer>
+
+<script src="/static/js/script.js"></script>
 
 </body>
 

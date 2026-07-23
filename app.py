@@ -3,6 +3,8 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
+from fastapi.staticfiles import StaticFiles
+
 from src.pipeline.prediction_pipeline import (
     VehicleData,
     PredictionPipeline,
@@ -12,6 +14,12 @@ app = FastAPI(
     title="Vehicle Insurance Prediction",
     description="End-to-End MLOps Project by MASUDUR RAHMAN",
     version="1.0"
+)
+
+app.mount(
+    "/static",
+    StaticFiles(directory="src/static"),
+    name="static",
 )
 
 templates = Jinja2Templates(directory="src/templates")
@@ -64,23 +72,28 @@ async def predict(
 
     prediction = prediction_pipeline.predict(dataframe)
 
+    prediction_value = int(prediction)
+
     probability = prediction_pipeline.predict_proba(dataframe)
 
     prediction_label = (
         "Interested in Vehicle Insurance"
-        if prediction == 1
+        if prediction_value == 1
         else "Not Interested in Vehicle Insurance"
     )
 
     probability = round(probability * 100, 2)
+    progress_degree = (probability / 100) * 360
 
     return templates.TemplateResponse(
         request=request,
         name="home.html",
-        context={
-            "prediction": prediction_label,
-            "probability": probability,
-        },
+            context={
+                "prediction": prediction_label,
+                "prediction_value":prediction_value,
+                "probability": probability,
+                "progress_degree": progress_degree,
+            },
     )
 
 

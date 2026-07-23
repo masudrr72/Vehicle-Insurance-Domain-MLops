@@ -1,0 +1,760 @@
+:root{
+
+    --bg:#0F172A;
+    --card:#1E293B;
+    --primary:#2563EB;
+    --primary-hover:#1D4ED8;
+    --text:#F8FAFC;
+    --muted:#94A3B8;
+    --input:#334155;
+    --border:#475569;
+    --success:#22C55E;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:1150px;
+
+    margin:auto;
+
+    padding:60px 0;
+
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:50px;
+
+    color:#CBD5E1;
+
+    background:rgba(255,255,255,.05);
+
+    margin-bottom:25px;
+
+    font-size:14px;
+
+}
+
+.hero h1{
+
+    font-size:58px;
+
+    font-weight:800;
+
+    line-height:1.1;
+
+}
+
+.hero h1 span{
+
+    color:#60A5FA;
+
+}
+
+.hero p{
+
+    width:70%;
+
+    margin:25px auto;
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:17px;
+
+}
+
+/* ---------------- CARD ---------------- */
+
+.card{
+
+    background:rgba(30,41,59,.88);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:45px;
+
+    box-shadow:
+            0 20px 50px rgba(0,0,0,.35);
+
+}
+
+/* ---------------- GRID ---------------- */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    color:#CBD5E1;
+
+    font-weight:600;
+
+}
+
+.form-group label i{
+
+    color:#60A5FA;
+
+    margin-right:8px;
+
+}
+
+.form-group input,
+.form-group select{
+
+    background:var(--input);
+
+    color:white;
+
+    border:1px solid transparent;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    outline:none;
+
+    border-color:#60A5FA;
+
+    background:#3B4A61;
+
+}
+
+/* ---------------- BUTTON ---------------- */
+
+.predict-btn{
+
+    margin-top:35px;
+
+    width:100%;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.predict-btn i{
+
+    margin-right:10px;
+
+}
+
+.predict-btn:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-2px);
+
+    box-shadow:0 15px 35px rgba(37,99,235,.35);
+
+}
+
+/* ---------------- RESULT ---------------- */
+
+.result-card{
+
+    margin-top:40px;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:#111827;
+
+    animation:fadeUp .5s ease;
+
+}
+
+.result-card h2{
+
+    text-align:center;
+
+    font-size:28px;
+
+}
+
+.prediction-text{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#60A5FA;
+
+}
+
+.probability-number{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    font-size:48px;
+
+    font-weight:800;
+
+}
+
+
+
+
+.confidence{
+
+    margin-top:18px;
+
+    color:#94A3B8;
+
+    text-align:center;
+
+    letter-spacing:1px;
+
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+}
+
+footer strong{
+
+    color:white;
+
+}
+
+.footer-links{
+
+    margin:20px 0;
+
+}
+
+.footer-links a{
+
+    color:#CBD5E1;
+
+    text-decoration:none;
+
+    margin:0 12px;
+
+    font-size:24px;
+
+    transition:.25s;
+
+}
+
+.footer-links a:hover{
+
+    color:#60A5FA;
+
+}
+
+footer small{
+
+    color:#64748B;
+
+}
+
+/* ---------------- BACKGROUND ---------------- */
+
+.background-blur{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    filter:blur(150px);
+
+    z-index:-1;
+
+}
+
+.blur1{
+
+    width:320px;
+
+    height:320px;
+
+    background:#2563EB;
+
+    top:-100px;
+
+    left:-100px;
+
+    opacity:.18;
+
+}
+
+.blur2{
+
+    width:280px;
+
+    height:280px;
+
+    background:#7C3AED;
+
+    right:-80px;
+
+    bottom:-80px;
+
+    opacity:.18;
+
+}
+
+/* ---------------- ANIMATION ---------------- */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width:900px){
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.hero p{
+
+width:100%;
+
+}
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.card{
+
+padding:30px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.container{
+
+width:94%;
+
+}
+
+.card{
+
+padding:20px;
+
+}
+
+.probability-number{
+
+font-size:36px;
+
+}
+
+}
+
+
+/* ---------- RESULT HEADER ---------- */
+
+.result-header{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#CBD5E1;
+
+    font-size:20px;
+
+    margin-bottom:25px;
+
+}
+
+.result-header i{
+
+    color:#22C55E;
+
+}
+
+/* ---------- STATUS ---------- */
+
+.prediction-status{
+
+    width:fit-content;
+
+    margin:0 auto 35px;
+
+    padding:12px 22px;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.success{
+
+    background:#14532D;
+
+    color:#BBF7D0;
+
+}
+
+.danger{
+
+    background:#7F1D1D;
+
+    color:#FECACA;
+
+}
+
+/* ---------- CIRCLE ---------- */
+
+.circle{
+
+    width:170px;
+    height:170px;
+
+    margin:0 auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.circle-success{
+
+    background: conic-gradient(
+        #22C55E 0deg var(--progress),
+        #334155 var(--progress) 360deg
+    );
+
+}
+
+.circle-danger{
+
+    background: conic-gradient(
+        #EF4444 0deg var(--progress),
+        #334155 var(--progress) 360deg
+    );
+
+}
+
+.circle-inner{
+
+    width:130px;
+
+    height:130px;
+
+    background:#111827;
+
+    border-radius:50%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.circle-inner span{
+
+    font-size:34px;
+
+    font-weight:800;
+
+}
+
+.circle-inner small{
+
+    color:#94A3B8;
+
+}
+
+/* ---------- MODEL INFO ---------- */
+
+.model-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    margin-top:35px;
+
+}
+
+.model-info div{
+
+    background:#1E293B;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    text-align:center;
+
+}
+
+.model-info h4{
+
+    color:#94A3B8;
+
+    margin-bottom:8px;
+
+}
+
+.model-info p{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+
+.progress{
+
+    width:100%;
+    height:12px;
+    margin-top:30px;
+
+    background:#334155;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    transition:width .8s ease;
+
+}
+
+
+
+.progress-success{
+
+    background:linear-gradient(90deg,#22C55E,#4ADE80);
+
+}
+
+.progress-danger{
+
+    background:linear-gradient(90deg,#DC2626,#F87171);
+
+}
+
+
+/* ---------- DISCLAIMER ---------- */
+
+.disclaimer{
+
+    margin-top:30px;
+
+    padding:18px 22px;
+
+    border-left:4px solid #2563EB;
+
+    background:#1E293B;
+
+    color:#CBD5E1;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    border-radius:10px;
+
+}
+
+/* ---------- DISCLAIMER ---------- */
+
+.disclaimer{
+
+    margin-top:28px;
+
+    padding:16px 20px;
+
+    background:#0F172A;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-left:4px solid #2563EB;
+
+    border-radius:12px;
+
+    color:#CBD5E1;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    text-align:center;
+
+}
+
+
+footer{
+    position: relative;
+    z-index: 100;
+}
+
+.footer-links a{
+    position: relative;
+    z-index: 101;
+}
