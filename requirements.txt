@@ -7,7 +7,6 @@ seaborn
 scikit-learn
 xgboost
 catboost
-pymongo
 from_root
 dill
 certifi
