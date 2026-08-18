@@ -16,6 +16,7 @@ from src.entity.azure_estimator import AzureEstimator
 from src.exception import MyException
 from src.logger import logging
 from src.utils.main_utils import load_object
+from src.utils import mlflow_utils
 
 
 @dataclass
@@ -161,6 +162,22 @@ class ModelEvaluation:
 
             evaluation_response = self.evaluate_model()
 
+
+            mlflow_utils.start_or_resume_run(run_id=self.model_trainer_artifact.mlflow_run_id)
+
+            mlflow_utils.log_metrics({
+                "candidate_roc_auc": evaluation_response.trained_model_roc_auc_score,
+                "production_roc_auc": evaluation_response.production_model_roc_auc_score,
+                "score_difference": evaluation_response.difference,
+            })
+
+            mlflow_utils.set_tags({
+                "is_model_accepted": str(evaluation_response.is_model_accepted),
+                "model_stage": "accepted" if evaluation_response.is_model_accepted else "rejected",
+            })
+
+            mlflow_utils.end_run()
+
             model_evaluation_artifact = ModelEvaluationArtifact(
                 is_model_accepted=evaluation_response.is_model_accepted,
                 changed_accuracy=evaluation_response.difference,
@@ -179,4 +196,5 @@ class ModelEvaluation:
             return model_evaluation_artifact
 
         except Exception as e:
+            mlflow_utils.end_run()
             raise MyException(e, sys)

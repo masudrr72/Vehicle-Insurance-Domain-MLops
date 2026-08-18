@@ -1,4 +1,6 @@
 import sys
+import time
+from datetime import datetime
 from typing import Tuple
 import numpy as np
 
@@ -12,6 +14,7 @@ from src.entity.config_entity import ModelTrainerConfig
 from src.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact, ClassificationMetricArtifact
 from src.utils.main_utils import load_numpy_array_data, save_object, load_object
 from src.entity.estimator import MyModel
+from src.utils import mlflow_utils
 
 
 class ModelTrainer:
@@ -40,7 +43,9 @@ class ModelTrainer:
             )
 
             logging.info("Training model")
+            training_start = time.time()
             model.fit(X_train, y_train)
+            training_duration_seconds = time.time() - training_start
             logging.info("Model training complete")
 
             y_pred = model.predict(X_test)
@@ -65,6 +70,52 @@ class ModelTrainer:
                 f1_score = f1,
                 roc_auc_score = roc_auc
             )
+
+            ###########################################################
+            # MLflow: params, metrics, imbalance/dataset tags, model
+            # (must happen here, while `model` is still the raw
+            # XGBClassifier - before it gets wrapped into MyModel)
+            ###########################################################
+
+            positive_count = int(np.sum(y_train == 1))
+            negative_count = int(np.sum(y_train == 0))
+            dataset_size = int(len(y_train) + len(y_test))
+
+            mlflow_utils.log_params({
+                "model_name": "XGBoost",
+                "n_estimators": self.model_trainer_config._n_estimators,
+                "learning_rate": self.model_trainer_config._learning_rate,
+                "max_depth": self.model_trainer_config._max_depth,
+                "min_child_weight": self.model_trainer_config._min_child_weight,
+                "subsample": self.model_trainer_config._subsample,
+                "colsample_bytree": self.model_trainer_config._colsample_bytree,
+                "reg_lambda": self.model_trainer_config._reg_lambda,
+                "reg_alpha": self.model_trainer_config._reg_alpha,
+                "gamma": self.model_trainer_config._gamma,
+                "scale_pos_weight": self.model_trainer_config._scale_pos_weight,
+                "random_state": self.model_trainer_config._random_state,
+            })
+
+            mlflow_utils.set_tags({
+                "class_balancing_strategy": "scale_pos_weight",
+                "dataset_name": "vehicle-insurance",
+                "model_stage": "candidate",
+            })
+
+            mlflow_utils.log_metrics({
+                "accuracy": accuracy,
+                "precision": precision,
+                "recall": recall,
+                "f1_score": f1,
+                "roc_auc": roc_auc,
+                "training_time_seconds": training_duration_seconds,
+                "dataset_size": dataset_size,
+                "positive_class_ratio": positive_count / len(y_train),
+                "negative_class_ratio": negative_count / len(y_train),
+            })
+
+            mlflow_utils.log_xgb_model(model, artifact_path="model")
+
             
             return model, metric_artifact
 
@@ -77,6 +128,13 @@ class ModelTrainer:
         try:
 
             logging.info("Entered initiate_model_trainer method.")
+
+            run_name = f"xgboost_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            mlflow_run_id = mlflow_utils.start_or_resume_run(run_name=run_name)
+
+            git_sha = mlflow_utils.get_git_commit_sha()
+            if git_sha:
+                mlflow_utils.set_tags({"git_commit": git_sha})
 
             X_train = load_numpy_array_data(
                 file_path= self.data_transformation_artifact.transformed_train_feature_file_path
@@ -121,7 +179,8 @@ class ModelTrainer:
 
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,
-                metric_artifact=metric_artifact
+                metric_artifact=metric_artifact,
+                mlflow_run_id=mlflow_run_id
             )
 
             logging.info("Exited initiate_model_trainer method.")
@@ -129,6 +188,7 @@ class ModelTrainer:
             return model_trainer_artifact
 
         except Exception as e:
+            mlflow_utils.end_run()
             raise MyException(e, sys)
         
 

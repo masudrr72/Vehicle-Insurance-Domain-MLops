@@ -22,6 +22,6 @@ imblearn
 
 dotenv 
 azure-storage-blob
-
+mlflow
 
 -e .

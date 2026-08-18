@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -36,6 +37,12 @@ class ClassificationMetricArtifact:
 class ModelTrainerArtifact:
     trained_model_file_path:str
     metric_artifact: str
+    mlflow_run_id: Optional[str] = None
+    """
+    ID of the MLflow run started during training. ModelEvaluation resumes
+    this exact run to log the accept/reject decision, so one MLflow run
+    represents the full train -> evaluate lifecycle for a candidate model.
+    """
 
 
 @dataclass

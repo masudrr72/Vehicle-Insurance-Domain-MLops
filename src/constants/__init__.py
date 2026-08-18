@@ -79,6 +79,10 @@ AZURE_STORAGE_CONTAINER_NAME: str = "model-registry"
 
 MODEL_PUSHER_BLOB_PREFIX: str = "vehicle-insurance"
 
+# MLflow experiment tracking
+
+MLFLOW_TRACKING_URI: str = os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
+MLFLOW_EXPERIMENT_NAME: str = os.getenv("MLFLOW_EXPERIMENT_NAME", "vehicle-insurance-prediction")
 
 
 
